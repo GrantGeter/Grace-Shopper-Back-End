@@ -23,7 +23,8 @@ orderRouter.get('/:orderId', requireUser, async (req, res, next) => {
 orderRouter.patch('/:orderId', requireUser, async (req, res, next) => {  
 
     try {
-        const cartItems = await updateOrder() //orderId
+        const cartItems = await updateOrder() // orderId, productId, quantityId       --this needs re-working
+        res.send(cartItems)
     } catch (error) {
         next(error)
     }

@@ -24,7 +24,7 @@ productsRouter.get('/', async (req, res, next) => {
 productsRouter.get('/:id', async (req, res, next) => {
 
     try {
-        const allProducts = await getAllProductsById();
+        const allProducts = await getAllProductsById(); // productId
         res.send(allProducts)
     } catch ({name, message}) {
         next({
@@ -37,7 +37,7 @@ productsRouter.get('/:id', async (req, res, next) => {
 productsRouter.get('/:category', async (req, res, next) => {
 
     try {
-        const allProducts = await getAllProductsByCategory();
+        const allProducts = await getAllProductsByCategory(); //categoryId
         res.send(allProducts)
     } catch ({name, message}) {
         next({
@@ -50,7 +50,7 @@ productsRouter.get('/:category', async (req, res, next) => {
 productsRouter.post('/', requireAdmin, async (req, res, next) => {
 
     try {
-        const product = await createProduct();
+        const product = await createProduct(); // name, description, category, photos, price
         res.send(product)
     } catch ({name, message}) {
         next({
