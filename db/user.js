@@ -48,3 +48,11 @@ const getUserByUsername = async (username) => {
         throw error
     }
 }
+
+module.exports = {
+    createUser,
+    getUserById,
+    getUserByUsername,
+   // need funcction for login
+};
+  
