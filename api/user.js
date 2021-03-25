@@ -1,20 +1,21 @@
 const express = require('express');
-const usersRouter = express.Router();
+const userRouter = express.Router();
 const jwt = require('jsonwebtoken');
 const { 
     createUser,
     getUserByUsername,
-    getUser
+    getUserById,
+   // need function for login
 } = require('../db/index');
 const { requireUser } = require('./utils');
 
 
-usersRouter.use((req, res, next) => {
-    console.log("A request is being made to /users");     
+userRouter.use((req, res, next) => {
+    console.log("A request is being made to /user");     
     next();
 })
 
-usersRouter.post('/register', async (req, res, next) => {
+userRouter.post('/register', async (req, res, next) => {
 
     const _user = await getUserByUsername(req.body); // username
     try{
@@ -30,7 +31,7 @@ usersRouter.post('/register', async (req, res, next) => {
     }
 });
 
-usersRouter.post('/login', async (req, res, next) => {
+userRouter.post('/login', async (req, res, next) => {
     const user = await getUser(req.body) //username, password
     try {
         
@@ -43,7 +44,7 @@ usersRouter.post('/login', async (req, res, next) => {
     }
 })
 
-usersRouter.get('/me', requireUser, async (req, res, next) => {
+userRouter.get('/me', requireUser, async (req, res, next) => {
 
     try {        
         res.send(req.user)
@@ -54,7 +55,7 @@ usersRouter.get('/me', requireUser, async (req, res, next) => {
    
 })
 
-usersRouter.get('/:username/orders', requireUser, async (req, res, next) => {
+userRouter.get('/:username/orders', requireUser, async (req, res, next) => {
 
     try {
         const userOrders = await getUserPastOrders(req.body); // userId
@@ -67,4 +68,4 @@ usersRouter.get('/:username/orders', requireUser, async (req, res, next) => {
     }
 })
 
-module.exports = usersRouter;
+module.exports = userRouter;
