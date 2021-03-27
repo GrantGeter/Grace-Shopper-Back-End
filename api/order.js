@@ -16,12 +16,12 @@ orderRouter.use((req, res, next) => {
 orderRouter.get('/', requireUser, async (req, res, next) => {
 
     try {
-        const orderItems = await getOrderById();  // orderId
+        const orderItems = await getOrderByUser();  // userId
         res.send(orderItems)
     } catch ({ name, message }) {
         next({
-            name: "getOrderByIdError",
-            message: "There was an error getting Order"
+            name: "getOrderByUserError",
+            message: "There was an error getting User Order"
         })
     }
 })

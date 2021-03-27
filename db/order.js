@@ -32,7 +32,7 @@ async function getOrderById(id){
 async function getOrderByUser(id){
     try {
         const { rows: [ order ] } = await client.query(`
-            SELECT "userId"
+            SELECT *
             FROM orders
             WHERE "userId"=${id}
             RETURNING *;
