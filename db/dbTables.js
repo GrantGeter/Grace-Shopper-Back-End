@@ -1,3 +1,6 @@
+const client = require('./client.js');
+
+
 
 async function dropTables() {
     try {
