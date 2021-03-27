@@ -1,7 +1,10 @@
 const express = require('express');
 const orderRouter = express.Router();
 const { requireUser } = require('./utils');
-const { getUserOrderItems } = require('../db/index');
+const { 
+    getUserOrderItems,
+    updateOrder
+} = require('../db/index');
 
 orderRouter.use((req, res, next) => {
     console.log("A request is being made to /order");
@@ -9,9 +12,10 @@ orderRouter.use((req, res, next) => {
 })
 
 orderRouter.get('/:orderId', requireUser, async (req, res, next) => {
+
     try {
-        const cartItems = await getUserOrderItems(req.user);  // userId
-        res.send(cartItems)
+        const orderItems = await getUserOrderItems();  // userId
+        res.send(orderItems)
     } catch ({ name, message }) {
         next({
             name: "getUserOrderItemsError",
@@ -23,10 +27,13 @@ orderRouter.get('/:orderId', requireUser, async (req, res, next) => {
 orderRouter.patch('/:orderId', requireUser, async (req, res, next) => {
 
     try {
-        const cartItems = await updateOrder() // orderId, productId, quantityId       --this needs re-working in db
-        res.send(cartItems)
-    } catch (error) {
-        next(error)
+        const orderItems = await updateOrder() // orderId, productId, quantityId      
+        res.send(orderItems)
+    } catch ({ name, message }) {
+        next({
+            name: "updateOrderError",
+            message: "There was an error updating Order"
+        })
     }
 })
 
