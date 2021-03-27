@@ -1,20 +1,20 @@
 const client = require('./client');
 
-async function createOrder({ userId, productId, quantity }){
+async function createOrder({ id }, { productId, quantity }){
     try {
         const { rows: [ order ] } = await client.query(`
           INSERT INTO orders(userId, productId, quantity) 
           VALUES($1, $2, $3)
           RETURNING *;
-        `, [ userId, productId, quantity ]);
+        `, [ id, productId, quantity ]);
     
         return order;
         }catch(error){
         throw error
         }
     }
-
-async function getOrderById(id){
+{
+async function getOrderById({ id }){
     try {
         const { rows: [ order ] } = await client.query(`
             SELECT *
@@ -29,7 +29,7 @@ async function getOrderById(id){
         }
     }
 
-async function getOrderByUser(id){
+async function getOrderByUser({ id }){
     try {
         const { rows: [ order ] } = await client.query(`
             SELECT *
@@ -44,7 +44,7 @@ async function getOrderByUser(id){
             }
         }
 
-async function addProductToOrder({ id, productId, quantity }){
+async function addProductToOrder({ id }, { productId, quantity }){
     try {
         const { rows: [ order ] } = await client.query(`
             UPDATE order

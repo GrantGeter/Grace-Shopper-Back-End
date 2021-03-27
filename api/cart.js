@@ -15,7 +15,7 @@ cartRouter.use((req, res, next) => {
 
 cartRouter.get('/:cartId', requireUser, async (req, res, next) => {
     try {
-        const cartItems = await getUserCartItems();  // cartId
+        const cartItems = await getUserCartItems(req.params);  // cartId
         res.send(cartItems)
     } catch ({ name, message }) {
         next({
@@ -39,7 +39,7 @@ cartRouter.patch('/:cartId', requireUser, async (req, res, next) => {
         }
     }else {
         try {
-            const cartItems = await updateCart() // cartId, orders-array of orders   
+            const cartItems = await updateCart(req.params, req.body) // cartId, orders-array of orders   
             res.send(cartItems)
         } catch ({ name, message }) {
             next({
@@ -53,7 +53,7 @@ cartRouter.patch('/:cartId', requireUser, async (req, res, next) => {
 cartRouter.delete('/:cartId', requireUser, async (req, res, next) => {
 
     try {
-        const cartItems = await deleteCart() // cartId    
+        const cartItems = await deleteCart(req.params) // cartId    
         res.send(cartItems)
     } catch ({ name, message }) {
         next({
