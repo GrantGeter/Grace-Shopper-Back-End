@@ -29,7 +29,6 @@ async function getOrderById(id){
         }
     }
 
-
 async function getOrderByUser(id){
     try {
         const { rows: [ order ] } = await client.query(`
@@ -38,7 +37,7 @@ async function getOrderByUser(id){
             WHERE "userId"=${id}
             RETURNING *;
         `);
-            
+    
             return order;
             }catch(error){
             throw error
@@ -59,7 +58,6 @@ async function addProductToOrder({id}){
             throw error
             }
         }
-
 
 module.exports = {
     createOrder,
