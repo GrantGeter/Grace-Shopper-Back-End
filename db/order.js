@@ -20,6 +20,7 @@ async function createOrder(name, description){
               SELECT id
               FROM orders
               WHERE id=${ id }
+              RETURNING *;
             `);
         
             return order;
@@ -33,7 +34,7 @@ async function createOrder(name, description){
             try {
                 const { rows: [ order ] } = await client.query(`
                   SELECT "userId"
-                  FROM order
+                  FROM orders
                   WHERE "userId"=${id}
                   RETURNING *;
                 `);
