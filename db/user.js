@@ -19,6 +19,22 @@ const createUser = async ({ username, email, name, password, admin }) => {
     }
 }
 
+const getUser = async ({ username, password }) => {
+    try {
+        const { rows: [user] } = await client.query(`
+            SELECT * FROM users
+            WHERE username=$1;
+        `, [username]);
+
+        if (bcrypt.compareSync(password, user.password)) {
+            delete user.password;
+            return user;
+        }
+    } catch (error) {
+        throw error
+    }
+}
+
 const getUserById = async (id) => {
     try {
         const { rows: [user] } = await client.query(`
@@ -54,5 +70,6 @@ module.exports = {
     createUser,
     getUserById,
     getUserByUsername,
+    getUser,
     // need funcction for login
 };
