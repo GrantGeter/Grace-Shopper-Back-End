@@ -70,6 +70,5 @@ module.exports = {
     createUser,
     getUserById,
     getUserByUsername,
-    getUser,
-    // need funcction for login
+    getUser
 };

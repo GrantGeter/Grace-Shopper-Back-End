@@ -4,8 +4,7 @@ const jwt = require('jsonwebtoken');
 const {
     createUser,
     getUserByUsername,
-    getUserById,
-    // need function for login
+    getUserById
 } = require('../db/index');
 const { requireUser } = require('./utils');
 
@@ -16,7 +15,7 @@ userRouter.use((req, res, next) => {
 })
 
 userRouter.post('/register', async (req, res, next) => {
-    console.log(req.body);
+   
     const _user = await getUserByUsername(req.body); // username
     try {
         if (_user) {
@@ -26,12 +25,16 @@ userRouter.post('/register', async (req, res, next) => {
             res.send({ user })
         }
 
-    } catch (error) {
-        next(error);
+    } catch ({ name, message }) {
+        next({
+            name: "createUSerError",
+            message: "There was an error creating User"
+        })
     }
 });
 
 userRouter.post('/login', async (req, res, next) => {
+
     const user = await getUser(req.body) //username, password
     try {
 
@@ -55,17 +58,17 @@ userRouter.get('/me', requireUser, async (req, res, next) => {
 
 })
 
-userRouter.get('/:username/orders', requireUser, async (req, res, next) => {
+// userRouter.get('/:username/orders', requireUser, async (req, res, next) => {
 
-    try {
-        const userOrders = await getUserPastOrders(req.body); // userId
-        res.send(userOrders)
-    } catch ({ name, message }) {
-        next({
-            name: "getUserPastOrdersError",
-            message: "There was an error getting User Orders"
-        })
-    }
-})
+//     try {
+//         const userOrders = await getUserPastOrders(req.body); // userId
+//         res.send(userOrders)
+//     } catch ({ name, message }) {
+//         next({
+//             name: "getUserPastOrdersError",
+//             message: "There was an error getting User Orders"
+//         })
+//     }
+// })
 
 module.exports = userRouter;

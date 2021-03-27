@@ -55,7 +55,7 @@ productsRouter.get('/category/:category', async (req, res, next) => {
     }
 })
 
-productsRouter.post('/', async (req, res, next) => {
+productsRouter.post('/', requireAdmin, async (req, res, next) => {
 
     try {
         const product = await createProduct(req.body); // name, description, category, photos, price
@@ -72,7 +72,7 @@ productsRouter.post('/', async (req, res, next) => {
     }
 })
 
-productsRouter.patch('/update/:productId', async (req, res, next) => {
+productsRouter.patch('/update/:productId', requireAdmin, async (req, res, next) => {
 
     try {
         const product = await updateProduct(req.params, req.body); // productId
@@ -85,7 +85,7 @@ productsRouter.patch('/update/:productId', async (req, res, next) => {
     }
 })
 
-productsRouter.delete('/delete/:productId', async (req, res, next) => {
+productsRouter.delete('/delete/:productId', requireAdmin, async (req, res, next) => {
 
     try {
         const product = await deleteProduct(req.params); // productId

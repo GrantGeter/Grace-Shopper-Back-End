@@ -10,7 +10,7 @@ function requireUser(req, res, next) {
 }
 
 function requireAdmin(req, res, next) {
-    if (!req.user.admin) {
+    if (req.user.admin == false) {
         res.status(401)
         next({
           name: "MissingAdminAuthorizationError",
