@@ -13,7 +13,7 @@ async function createOrder({ id }, { productId, quantity }){
         throw error
         }
     }
-{
+
 async function getOrderById({ id }){
     try {
         const { rows: [ order ] } = await client.query(`
@@ -64,4 +64,4 @@ module.exports = {
     getOrderById,
     getOrderByUser,
     addProductToOrder
-}        
+};        
