@@ -7,13 +7,13 @@ server.use(bodyParser.json());
 const cors = require('cors');
 server.use(cors());
 
-server.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header(
-      "Access-Control-Allow-Headers",
-      "Origin, X-Requested-With, Content-Type, Accept"
-    );
-    next();
+server.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
 });
 
 const morgan = require('morgan');
@@ -25,10 +25,10 @@ const client = require('./db/client');
 const apiRouter = require('./api');
 server.use('/api', apiRouter);
 
-const { PORT = 3000 } = process.env
+const { PORT = 3030 } = process.env
 
 server.listen(PORT, () => {
-    console.log('server is up on ', PORT);
-    client.connect();
+  console.log('server is up on ', PORT);
+  client.connect();
 })
 
