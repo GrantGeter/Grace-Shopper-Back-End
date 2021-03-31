@@ -4,7 +4,8 @@ const jwt = require('jsonwebtoken');
 const {
     createUser,
     getUserByUsername,
-    getUserById
+    getUserById,
+    editProfile
 } = require('../db/index');
 const { requireUser } = require('./utils');
 
@@ -44,6 +45,19 @@ userRouter.post('/login', async (req, res, next) => {
         }
     } catch (error) {
         next(error)
+    }
+})
+
+userRouter.post('/:username/edit', async (req, res, next) => {
+
+    try {
+        const user = await editProfile(req.user, req.body); // id, username, email, password, name
+        res.send(user)
+    } catch ({ name, message }) {
+        next({
+            name,
+            message
+        })
     }
 })
 

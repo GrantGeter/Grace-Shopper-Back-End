@@ -1,6 +1,7 @@
 const client = require('./client');
 
 async function createOrder({ id }, { productId, quantity }){
+    console.log(id, productId, quantity)
     try {
         const { rows: [ order ] } = await client.query(`
           INSERT INTO orders(userId, productId, quantity) 

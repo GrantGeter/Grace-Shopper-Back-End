@@ -25,7 +25,7 @@ const client = require('./db/client');
 const apiRouter = require('./api');
 server.use('/api', apiRouter);
 
-const { PORT = 3000 } = process.env
+const { PORT = 3030 } = process.env
 
 server.listen(PORT, () => {
     console.log('server is up on ', PORT);
