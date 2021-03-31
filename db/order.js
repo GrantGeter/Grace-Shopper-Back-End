@@ -37,7 +37,7 @@ async function getOrderByUser(id){
             WHERE "userId"=${id}
             RETURNING *;
         `);
-    
+
             return order;
             }catch(error){
             throw error
