@@ -46,8 +46,10 @@ async function createTables() {
           id SERIAL PRIMARY KEY,
           "userId" INTEGER REFERENCES users(id),
           "productId" INTEGER REFERENCES products(id),
+
           quantity INTEGER NOT NULL,
           active BOOLEAN DEFAULT TRUE
+
         );
 
       `);

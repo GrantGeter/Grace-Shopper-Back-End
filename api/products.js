@@ -20,7 +20,7 @@ productsRouter.get('/', async (req, res, next) => {
 
     try {
         const allProducts = await getAllProducts();
-        res.send(allProducts)
+        res.send({ allProducts })
     } catch ({ name, message }) {
         next({
             name: "getAllProductsError",
@@ -59,7 +59,8 @@ productsRouter.post('/', requireAdmin, async (req, res, next) => {
 
     try {
         const product = await createProduct(req.body); // name, description, category, photos, price
-        res.send(product)
+        console.log(product);
+        res.send({ product })
     } catch ({ name, message }) {
         next({
             name,
