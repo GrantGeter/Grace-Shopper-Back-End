@@ -48,6 +48,7 @@ async function createTables() {
           "productId" INTEGER REFERENCES products(id),
           quantity INTEGER NOT NULL,
           active BOOLEAN DEFAULT TRUE
+
         );
 
       `);

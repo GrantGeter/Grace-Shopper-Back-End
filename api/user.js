@@ -5,7 +5,8 @@ const {
     createUser,
     getUserByUsername,
     getUserById,
-    editProfile
+    editProfile,
+    getUser
 } = require('../db/index');
 const { requireUser } = require('./utils');
 
@@ -16,7 +17,7 @@ userRouter.use((req, res, next) => {
 })
 
 userRouter.post('/register', async (req, res, next) => {
-   
+
     const _user = await getUserByUsername(req.body); // username
     try {
         if (_user) {
@@ -36,12 +37,12 @@ userRouter.post('/register', async (req, res, next) => {
 
 userRouter.post('/login', async (req, res, next) => {
 
-    const user = await getUser(req.body) //username, password
     try {
-
+        const user = await getUser(req.body) //username, password
+        console.log(user);
         if (user) {
             const token = jwt.sign({ id: user.id, username: user.username }, process.env.JWT_SECRET);
-            res.send({ token: token });
+            res.send({ user, token });
         }
     } catch (error) {
         next(error)
