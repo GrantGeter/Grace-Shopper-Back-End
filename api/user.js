@@ -5,6 +5,7 @@ const {
     createUser,
     getUserByUsername,
     getUserById,
+    editProfile,
     getUser
 } = require('../db/index');
 const { requireUser } = require('./utils');
@@ -45,6 +46,19 @@ userRouter.post('/login', async (req, res, next) => {
         }
     } catch (error) {
         next(error)
+    }
+})
+
+userRouter.post('/:username/edit', requireUser, async (req, res, next) => {
+    console.log("HHEERRREEEE", req.user)
+    try {
+        const user = await editProfile(req.user, req.body); // id, username, email, password, name
+        res.send(user)
+    } catch ({ name, message }) {
+        next({
+            name,
+            message
+        })
     }
 })
 

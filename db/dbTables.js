@@ -6,8 +6,7 @@ async function dropTables() {
   try {
     console.log('Dropping All Tables...');
     // drop all tables, in the correct order
-    await client.query(`
-      DROP TABLE IF EXISTS cart;
+    await client.query(`      
       DROP TABLE IF EXISTS orders;
       DROP TABLE IF EXISTS products;
       DROP TABLE IF EXISTS users;
@@ -47,13 +46,8 @@ async function createTables() {
           id SERIAL PRIMARY KEY,
           "userId" INTEGER REFERENCES users(id),
           "productId" INTEGER REFERENCES products(id),
-          quantity INTEGER NOT NULL
-        );
-
-        CREATE TABLE cart (
-          id SERIAL PRIMARY KEY,
-          orders INTEGER REFERENCES orders(id), 
-          completed BOOLEAN DEFAULT false
+          quantity INTEGER NOT NULL,
+          active BOOLEAN DEFAULT TRUE
         );
 
       `);
@@ -113,7 +107,6 @@ const createInitialProducts = async () => {
     throw error;
   }
 }
-
 
 async function rebuildDB() {
   try {
