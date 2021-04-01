@@ -49,8 +49,8 @@ userRouter.post('/login', async (req, res, next) => {
     }
 })
 
-userRouter.post('/:username/edit', async (req, res, next) => {
-
+userRouter.post('/:username/edit', requireUser, async (req, res, next) => {
+    console.log("HHEERRREEEE", req.user)
     try {
         const user = await editProfile(req.user, req.body); // id, username, email, password, name
         res.send(user)
