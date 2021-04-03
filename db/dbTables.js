@@ -6,7 +6,7 @@ async function dropTables() {
   try {
     console.log('Dropping All Tables...');
     // drop all tables, in the correct order
-    await client.query(`      
+    await client.query(`
       DROP TABLE IF EXISTS orders;
       DROP TABLE IF EXISTS products;
       DROP TABLE IF EXISTS users;
@@ -47,7 +47,7 @@ async function createTables() {
           "userId" INTEGER REFERENCES users(id),
           "productId" INTEGER REFERENCES products(id),
           quantity INTEGER NOT NULL,
-          active BOOLEAN DEFAULT TRUE
+          active BOOLEAN DEFAULT true
         );
 
       `);

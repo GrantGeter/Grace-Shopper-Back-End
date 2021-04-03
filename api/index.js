@@ -47,9 +47,6 @@ apiRouter.use('/products', productsRouter);
 const userRouter = require('./user');
 apiRouter.use('/user', userRouter);
 
-const cartRouter = require('./cart');
-apiRouter.use('/cart', cartRouter);
-
 const orderRouter = require('./order');
 apiRouter.use('/order', orderRouter)
 

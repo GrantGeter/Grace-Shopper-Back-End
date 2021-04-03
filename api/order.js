@@ -1,11 +1,12 @@
 const express = require('express');
 const orderRouter = express.Router();
 const { requireUser } = require('./utils');
-const { 
-    createOrder,
+const {
     getOrderById,
-    getOrderByUser,
-    addProductToOrder
+    getOrdersByUser,
+    getActiveOrdersByUser,
+    addProductToOrder,
+    setOrderToInactive
 } = require('../db/index');
 
 orderRouter.use((req, res, next) => {
@@ -16,12 +17,12 @@ orderRouter.use((req, res, next) => {
 orderRouter.get('/', requireUser, async (req, res, next) => {
 
     try {
-        const orderItems = await getOrderByUser(req.user);  // userId
-        res.send(orderItems)
+        const orders = await getActiveOrdersByUser(req.user);  // userId
+        res.send(orders)
     } catch ({ name, message }) {
         next({
             name: "getOrderByUserError",
-            message: "There was an error getting User Order"
+            message
         })
     }
 })
@@ -29,12 +30,12 @@ orderRouter.get('/', requireUser, async (req, res, next) => {
 orderRouter.post('/', requireUser, async (req, res, next) => {
 
     try {
-        const order = await createOrder(req.user, req.body);  // userId, productId, quantity
+        const order = await addProductToOrder(req.user, req.body);  // userId, productId, quantity
         res.send(order)
     } catch ({ name, message }) {
         next({
             name: "createOrderError",
-            message: "There was an error creating Order"
+            message
         })
     }
 })
@@ -55,8 +56,21 @@ orderRouter.get('/:orderId', async (req, res, next) => {
 orderRouter.patch('/:orderId', requireUser, async (req, res, next) => {
 
     try {
-        const orderItems = await addProductToOrder(req.params, req.body) // orderId, productId, quantity      
-        res.send(orderItems)
+        const order = await setOrderToInactive(req.params) // orderId, productId, quantity      
+        res.send(order)
+    } catch ({ name, message }) {
+        next({
+            name: "updateOrderError",
+            message: "There was an error updating Order"
+        })
+    }
+})
+
+orderRouter.delete('/:orderId', requireUser, async (req, res, next) => {
+
+    try {
+        const order = await deleteOrder(req.params) // orderId, productId, quantity      
+        res.send(order)
     } catch ({ name, message }) {
         next({
             name: "updateOrderError",
