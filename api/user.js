@@ -18,14 +18,14 @@ userRouter.use((req, res, next) => {
 
 userRouter.post('/register', async (req, res, next) => {
 
-    const _user = await getUserByUsername(req.body); // username
+    // const _user = await getUserByUsername(req.body); // username
     try {
-        if (_user) {
-            next();
-        } else {
+        // if (_user) {
+        //     next();
+        // } else {
             const user = await createUser(req.body);  // username, password         
             res.send({ user })
-        }
+        // }
 
     } catch ({ name, message }) {
         next({
@@ -50,7 +50,7 @@ userRouter.post('/login', async (req, res, next) => {
 })
 
 userRouter.post('/:username/edit', requireUser, async (req, res, next) => {
-    console.log("HHEERRREEEE", req.user)
+    
     try {
         const user = await editProfile(req.user, req.body); // id, username, email, password, name
         res.send(user)
