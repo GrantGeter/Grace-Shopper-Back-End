@@ -73,31 +73,38 @@ const createInitialProducts = async () => {
   try {
     const productsToCreate = [
       {
-        "name": "Polo Shirt",
+        "name": "Red Shirt",
         "description": "The finest quality shirt",
         "category": "shirts",
-        "photos": "somelinktophoto.com",
+        "photos": "https://i.imgur.com/YG80f8X.jpg",
         "price": 12
       },
       {
-        "name": "Champion Shirt",
+        "name": "Green Shirt",
         "description": "The finest quality shirt",
         "category": "shirts",
-        "photos": "somelinktophoto.com",
+        "photos": "https://i.imgur.com/UzjgCrF.jpg",
         "price": 12
       },
       {
-        "name": "Polo Shorts",
-        "description": "The finest quality shorts",
-        "category": "shorts",
-        "photos": "somelinktophoto.com",
+        "name": "Blue Shirt",
+        "description": "The finest quality shirt",
+        "category": "shirts",
+        "photos": "https://i.imgur.com/L0UpT6S.jpg",
         "price": 12
       },
       {
-        "name": "Champion Shorts",
-        "description": "The finest quality shorts",
-        "category": "shorts",
-        "photos": "somelinktophoto.com",
+        "name": "Purple Shirt",
+        "description": "The finest quality shirt",
+        "category": "shirts",
+        "photos": "https://i.imgur.com/QpLryoI.jpg",
+        "price": 12
+      },
+      {
+        "name": "Teal Shirt",
+        "description": "The finest quality shirt",
+        "category": "shirts",
+        "photos": "https://i.imgur.com/Ij6xP2g.jpg",
         "price": 12
       }
     ]
