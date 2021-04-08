@@ -1,5 +1,9 @@
 const client = require('./client');
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> ee0dee886701aa22b6a55359621cd43a45a061b3
 async function addProductToOrder({ id }, { productId, quantity }) {
     try {
         const { rows: [order] } = await client.query(`
