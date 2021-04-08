@@ -20,17 +20,19 @@ userRouter.post('/register', async (req, res, next) => {
 
     // const _user = await getUserByUsername(req.body); // username
     try {
-        // if (_user) {
-        //     next();
-        // } else {
-            const user = await createUser(req.body);  // username, password         
-            res.send({ user })
-        // }
+        if (_user) {
+            next();
+        } else {
+            const user = await createUser(req.body);  // username, password 
+            const token = jwt.sign({ id: user.id, username: user.username }, process.env.JWT_SECRET);
+
+            res.send({ user, token })
+        }
 
     } catch ({ name, message }) {
         next({
             name: "createUSerError",
-            message: "There was an error creating User"
+            message
         })
     }
 });

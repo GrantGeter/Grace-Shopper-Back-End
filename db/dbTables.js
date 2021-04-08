@@ -49,7 +49,6 @@ async function createTables() {
           quantity INTEGER NOT NULL,
           active BOOLEAN DEFAULT true
         );
-
       `);
     console.log("Finished building tables!");
   } catch (error) {
