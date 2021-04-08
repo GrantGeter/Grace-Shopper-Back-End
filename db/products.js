@@ -1,4 +1,5 @@
 const client = require('./client');
+const { getOrdersByProduct, deleteOrder } = require('./order');
 
 const createProduct = async ({ name, description, category, photos, price }) => {
     const { rows: [product] } = await client.query(`
@@ -25,6 +26,11 @@ const deleteProduct = async ({ productId }) => {
         WHERE id=$1
         RETURNING *;
     `, [productId]);
+
+    const ordersWithProducts = await getOrdersByProduct(productId);
+    ordersWithProducts.forEach(async order => {
+        await deleteOrder(order);
+    });
 }
 
 const getAllProducts = async () => {

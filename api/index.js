@@ -41,14 +41,14 @@ apiRouter.use((req, res, next) => {
   next();
 });
 
+const checkoutRouter = require('./checkout');
+apiRouter.use('/checkout', checkoutRouter);
+
 const productsRouter = require('./products');
 apiRouter.use('/products', productsRouter);
 
 const userRouter = require('./user');
 apiRouter.use('/user', userRouter);
-
-const cartRouter = require('./cart');
-apiRouter.use('/cart', cartRouter);
 
 const orderRouter = require('./order');
 apiRouter.use('/order', orderRouter)
