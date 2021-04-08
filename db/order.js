@@ -66,7 +66,7 @@ async function getOrdersByUser({ id }) {
         const { rows } = await client.query(`
             SELECT *
             FROM orders
-            WHERE "userId"=${id};
+            WHERE "userId"=${id} AND active=false;
         `);
 
         return rows;

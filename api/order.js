@@ -27,6 +27,19 @@ orderRouter.get('/', requireUser, async (req, res, next) => {
     }
 })
 
+orderRouter.get('/completed_orders', requireUser, async (req, res, next) => {
+
+    try {
+        const orders = await getOrdersByUser(req.user);  // userId
+        res.send(orders)
+    } catch ({ name, message }) {
+        next({
+            name: "getOrderByUserError",
+            message
+        })
+    }
+})
+
 orderRouter.post('/', requireUser, async (req, res, next) => {
 
     try {
