@@ -40,7 +40,7 @@ orderRouter.post('/', requireUser, async (req, res, next) => {
     }
 })
 
-orderRouter.get('/:orderId', requireUser, async (req, res, next) => {
+orderRouter.get('/:orderId', async (req, res, next) => {
 
     try {
         const orderItems = await getOrderById(req.params);  // orderId

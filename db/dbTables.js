@@ -107,7 +107,6 @@ const createInitialProducts = async () => {
   }
 }
 
-
 async function rebuildDB() {
   try {
     client.connect();
