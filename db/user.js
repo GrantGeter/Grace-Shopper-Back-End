@@ -66,9 +66,32 @@ const getUserByUsername = async ({ username }) => {
     }
 }
 
+const editProfile = async ({ id }, { username, email, password, name }) => {
+
+    try {
+        const { rows: [ user ]} = await client.query(`
+        UPDATE users
+        SET username = COALESCE($2, username),
+            email = COALESCE($3, email),
+            password = COALESCE($4, password),
+            name = COALESCE($5, name)
+        WHERE id=$1
+        RETURNING *;
+        `, [ id, username, email, password, name])
+
+    return user;
+    } catch (error) {
+        throw(error);
+    }
+}
+
+
+
+
 module.exports = {
     createUser,
     getUserById,
     getUserByUsername,
-    getUser
+    getUser,
+    editProfile
 };
