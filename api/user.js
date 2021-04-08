@@ -18,7 +18,7 @@ userRouter.use((req, res, next) => {
 
 userRouter.post('/register', async (req, res, next) => {
 
-    // const _user = await getUserByUsername(req.body); // username
+    const _user = await getUserByUsername(req.body); // username
     try {
         if (_user) {
             next();
