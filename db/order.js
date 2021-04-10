@@ -26,6 +26,21 @@ async function setOrderToInactive({ orderId }) {
     }
 }
 
+async function updateOrder({ orderId }, updatedOrder) {
+    const setString = Object.keys(updatedOrder).map((key, index) => {
+        return `${key}=$${index + 1}`
+    }).join(', ')
+    try {
+        const { rows: [order] } = await client.query(`
+            UPDATE orders
+            SET ${setString}
+            WHERE id=${orderId}
+        `, Object.values(updatedOrder));
+    } catch {
+        throw error;
+    }
+}
+
 async function deleteOrder({ orderId }) {
     const { rows: [order] } = await client.query(`
         DELETE FROM orders
@@ -95,5 +110,6 @@ module.exports = {
     getOrdersByProduct,
     addProductToOrder,
     setOrderToInactive,
+    updateOrder,
     deleteOrder
 };
