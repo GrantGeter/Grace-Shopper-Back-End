@@ -7,7 +7,8 @@ const {
     getActiveOrdersByUser,
     addProductToOrder,
     setOrderToInactive,
-    updateOrder
+    updateOrder,
+    deleteOrder
 } = require('../db/index');
 
 orderRouter.use((req, res, next) => {
@@ -91,7 +92,7 @@ orderRouter.delete('/:orderId', requireUser, async (req, res, next) => {
     } catch ({ name, message }) {
         next({
             name: "updateOrderError",
-            message: "There was an error updating Order"
+            message
         })
     }
 })
