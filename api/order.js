@@ -6,7 +6,6 @@ const {
     getOrdersByUser,
     getActiveOrdersByUser,
     addProductToOrder,
-    setOrderToInactive,
     updateOrder,
     deleteOrder
 } = require('../db/index');
@@ -69,12 +68,9 @@ orderRouter.get('/:orderId', async (req, res, next) => {
 })
 
 orderRouter.patch('/:orderId', requireUser, async (req, res, next) => {
+    console.log(req.body);
     try {
-        if (!req.body) {
-            const order = await setOrderToInactive(req.params) // orderId, productId, quantity      
-        } else {
-            const order = await updateOrder(req.params, req.body);
-        }
+        const order = await updateOrder(req.params, req.body);
         res.send(order)
     } catch ({ name, message }) {
         next({

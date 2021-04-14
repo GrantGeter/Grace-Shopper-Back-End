@@ -14,18 +14,6 @@ async function addProductToOrder({ id }, { productId, quantity }) {
     }
 }
 
-async function setOrderToInactive({ orderId }) {
-    try {
-        const { rows: [order] } = await client.query(`
-            UPDATE orders
-            SET active=$1
-            WHERE id=${orderId}
-        `, [false]);
-    } catch {
-        throw error;
-    }
-}
-
 async function updateOrder({ orderId }, updatedOrder) {
     const setString = Object.keys(updatedOrder).map((key, index) => {
         return `${key}=$${index + 1}`
@@ -109,7 +97,6 @@ module.exports = {
     getActiveOrdersByUser,
     getOrdersByProduct,
     addProductToOrder,
-    setOrderToInactive,
     updateOrder,
     deleteOrder
 };

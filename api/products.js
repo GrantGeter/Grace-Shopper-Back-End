@@ -59,7 +59,6 @@ productsRouter.post('/', requireAdmin, async (req, res, next) => {
 
     try {
         const product = await createProduct(req.body); // name, description, category, photos, price
-        console.log(product);
         res.send({ product })
     } catch ({ name, message }) {
         next({
