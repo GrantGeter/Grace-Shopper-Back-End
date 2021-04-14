@@ -41,7 +41,6 @@ userRouter.post('/login', async (req, res, next) => {
 
     try {
         const user = await getUser(req.body) //username, password
-        console.log(user);
         if (user) {
             const token = jwt.sign({ id: user.id, username: user.username }, process.env.JWT_SECRET);
             res.send({ user, token });
@@ -52,7 +51,7 @@ userRouter.post('/login', async (req, res, next) => {
 })
 
 userRouter.post('/:username/edit', requireUser, async (req, res, next) => {
-    
+
     try {
         const user = await editProfile(req.user, req.body); // id, username, email, password, name
         res.send(user)

@@ -12,7 +12,6 @@ apiRouter.get('/test', async (req, res, next) => {
   });
 })
 apiRouter.use(async (req, res, next) => {
-  console.log('here');
   const prefix = 'Bearer ';
   const authorization = req.header('Authorization');
   if (!authorization) {
@@ -25,7 +24,6 @@ apiRouter.use(async (req, res, next) => {
         const { id } = userId
 
         req.user = await getUserById(id);
-        console.log(req.user)
         next();
       }
     } catch ({ name, message }) {
@@ -36,7 +34,7 @@ apiRouter.use(async (req, res, next) => {
 
 apiRouter.use((req, res, next) => {
   if (req.user) {
-    console.log("User is set:", req.user);
+    // console.log("User is set:", req.user);
   }
   next();
 });

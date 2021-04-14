@@ -21,7 +21,7 @@ checkoutRouter.post('/', async (req, res) => {
         payment_method_types: ['card'],
         line_items: lineItems,
         mode: 'payment',
-        success_url: 'http://localhost:3000/',
+        success_url: 'http://localhost:3000/completed',
         cancel_url: 'http://localhost:3000/cart',
     });
 
