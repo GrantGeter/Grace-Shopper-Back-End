@@ -60,7 +60,7 @@ async function createTables() {
 const createInitialUsers = async () => {
   try {
     const usersToCreate = [
-      { username: 'Grant', email: 'grantgeter@gmail.com', password: 'password', name: 'Grant Geter', admin: true },
+      { username: 'Admin', email: 'admin@gmail.com', password: 'password', name: 'Admin', admin: true },
       { username: 'Bobby', email: 'bobsmith@gmail.com', password: 'password', name: 'Bob smith', admin: false },
     ]
     const users = await Promise.all(usersToCreate.map(createUser));
