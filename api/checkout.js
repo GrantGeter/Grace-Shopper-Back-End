@@ -1,4 +1,4 @@
-const stripe = require('stripe')('sk_test_51IdjzcA9fKf653FRhjjh9MPPuXUK7PiftsnN9EcDdZc3kHZQMFLqn0Rjmgi0ZNWn9b2pwas8f9o3dhBqBMmVxtYN00cRXhMoBA');
+const stripe = require('stripe')(process.env.STRIPE_TEST_KEY);
 const express = require('express');
 const { getProductById } = require('../db');
 const checkoutRouter = express.Router();
