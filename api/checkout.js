@@ -21,8 +21,8 @@ checkoutRouter.post('/', async (req, res) => {
         payment_method_types: ['card'],
         line_items: lineItems,
         mode: 'payment',
-        success_url: 'http://localhost:3000/completed',
-        cancel_url: 'http://localhost:3000/cart',
+        success_url: 'https://boringt-shirtcompany.netlify.app/completed',
+        cancel_url: 'https://boringt-shirtcompany.netlify.app/cart',
     });
 
     res.send({ id: session.id });
